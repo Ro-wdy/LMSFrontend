@@ -1,0 +1,33 @@
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-lg);
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.service-badge {
+  margin-bottom: var(--space-xs);
+}
+
+.service-card h3 {
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+}
+
+.service-card h3 small {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+}
+
+.service-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
