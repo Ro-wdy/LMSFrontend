@@ -35,11 +35,28 @@ const StaffDashboard = () => {
         <StatCard icon={<IoReceiptOutline />} iconBg="var(--color-teal)" value="65" label="Total Today" />
       </div>
 
-      <div className="card">
+      <div className="card mb-lg" style={{ borderTop: '4px solid var(--color-primary)' }}>
         <div className="card-header">
-          <h3 className="card-title">Active Orders</h3>
+          <h3 className="card-title">Quick Actions</h3>
+        </div>
+        <div className="quick-actions" style={{ gap: 'var(--space-md)' }}>
+          <button className="btn btn-secondary" onClick={() => navigate('/dashboard/orders')}>
+            Process Next Order
+          </button>
+          <button className="btn btn-outline" onClick={() => navigate('/dashboard/branches')}>
+            Manage Branch
+          </button>
+          <button className="btn btn-outline" onClick={() => navigate('/dashboard/branches')}>
+            Operational Hours
+          </button>
+        </div>
+      </div>
+
+      <div className="card" style={{ borderTop: '4px solid var(--color-secondary)' }}>
+        <div className="card-header">
+          <h3 className="card-title">Active Orders (Requests)</h3>
           <button className="btn btn-outline btn-sm" onClick={() => navigate('/dashboard/orders')}>
-            Manage Orders
+            Manage All Orders
           </button>
         </div>
         <div className="table-wrapper">

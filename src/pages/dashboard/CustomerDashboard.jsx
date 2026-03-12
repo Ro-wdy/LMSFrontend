@@ -17,12 +17,19 @@ const CustomerDashboard = () => {
 
   return (
     <div className="dashboard-page">
-      <div className="page-header">
+      <div className="page-header" style={{
+        background: 'var(--gradient-subtle-blue)',
+        padding: 'var(--space-xl) var(--space-lg)',
+        borderRadius: 'var(--radius-lg)',
+        color: '#fff',
+        boxShadow: 'var(--shadow-md)',
+        marginBottom: 'var(--space-2xl)'
+      }}>
         <div>
-          <h1>My Dashboard</h1>
-          <p>Track your laundry orders and activity</p>
+          <h1 style={{ color: '#fff' }}>My Dashboard</h1>
+          <p style={{ color: 'rgba(255, 255, 255, 0.9)' }}>Track your laundry orders and activity</p>
         </div>
-        <button className="btn btn-primary" onClick={() => navigate('/dashboard/orders')}>
+        <button className="btn" style={{ background: '#fff', color: 'var(--color-primary)', fontWeight: 'bold' }} onClick={() => navigate('/dashboard/orders')}>
           Place New Order
         </button>
       </div>
@@ -65,8 +72,8 @@ const CustomerDashboard = () => {
                     <td>{formatDate(order.date)}</td>
                     <td><StatusBadge status={order.status} /></td>
                     <td>
-                      <button className="btn btn-outline btn-sm" onClick={() => navigate('/track-order')}>
-                        Track
+                      <button className="btn btn-primary btn-sm" style={{ padding: '0.4rem 1rem', background: 'var(--color-primary)' }} onClick={() => navigate('/track-order')}>
+                        Track Order
                       </button>
                     </td>
                   </tr>
@@ -77,18 +84,18 @@ const CustomerDashboard = () => {
         </div>
       </div>
 
-      <div className="card mt-lg">
+      <div className="card mt-lg" style={{ borderTop: '4px solid var(--color-primary)' }}>
         <div className="card-header">
           <h3 className="card-title">Quick Actions</h3>
         </div>
-        <div className="quick-actions">
-          <button className="btn btn-primary btn-sm" onClick={() => navigate('/dashboard/orders')}>
+        <div className="quick-actions" style={{ gap: 'var(--space-md)' }}>
+          <button className="btn btn-primary" onClick={() => navigate('/track-order')}>
+            Track an Order
+          </button>
+          <button className="btn btn-secondary" onClick={() => navigate('/dashboard/orders')}>
             New Order
           </button>
-          <button className="btn btn-outline btn-sm" onClick={() => navigate('/track-order')}>
-            Track Order
-          </button>
-          <button className="btn btn-outline btn-sm" onClick={() => navigate('/dashboard/feedback')}>
+          <button className="btn btn-outline" onClick={() => navigate('/dashboard/feedback')}>
             Leave Feedback
           </button>
         </div>

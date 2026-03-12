@@ -51,8 +51,25 @@ const OwnerDashboard = () => {
       <div className="stats-grid">
         <StatCard icon={<IoReceiptOutline />} iconBg="var(--color-primary)" value="240" label="Total Orders" />
         <StatCard icon={<IoCardOutline />} iconBg="var(--color-secondary)" value="KES 125,400" label="This Month Revenue" />
-        <StatCard icon={<IoStorefrontOutline />} iconBg="var(--color-teal)" value="3" label="Branches" />
         <StatCard icon={<IoStarOutline />} iconBg="var(--color-warning)" value="4.7" label="Avg Rating" />
+        <StatCard icon={<IoStorefrontOutline />} iconBg="var(--color-teal)" value="3" label="Active Subscriptions" />
+      </div>
+
+      <div className="card mb-lg" style={{ borderTop: '4px solid var(--color-primary)' }}>
+        <div className="card-header">
+          <h3 className="card-title">Quick Actions</h3>
+        </div>
+        <div className="quick-actions" style={{ gap: 'var(--space-md)' }}>
+          <button className="btn btn-primary" onClick={() => navigate('/dashboard/services')}>
+            Manage Services
+          </button>
+          <button className="btn btn-secondary" onClick={() => navigate('/dashboard/packages')}>
+            Manage Packages
+          </button>
+          <button className="btn btn-outline" onClick={() => navigate('/dashboard/feedback')}>
+            View Feedback
+          </button>
+        </div>
       </div>
 
       <div className="dashboard-grid">
@@ -88,7 +105,7 @@ const OwnerDashboard = () => {
         </div>
       </div>
 
-      <div className="card mt-lg">
+      <div className="card mt-lg" style={{ borderTop: '4px solid var(--color-secondary)' }}>
         <div className="card-header">
           <h3 className="card-title">Recent Orders</h3>
           <button className="btn btn-outline btn-sm" onClick={() => navigate('/dashboard/orders')}>

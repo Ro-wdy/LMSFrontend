@@ -4,10 +4,17 @@ import './Dashboard.css';
 
 const AdminDashboard = () => (
   <div className="dashboard-page">
-    <div className="page-header">
+    <div className="page-header" style={{
+      background: 'var(--gradient-subtle-blue)',
+      padding: 'var(--space-xl) var(--space-lg)',
+      borderRadius: 'var(--radius-lg)',
+      color: '#fff',
+      boxShadow: 'var(--shadow-md)',
+      marginBottom: 'var(--space-2xl)'
+    }}>
       <div>
-        <h1>Admin Dashboard</h1>
-        <p>Platform support and monitoring</p>
+        <h1 style={{ color: '#fff' }}>Admin Dashboard</h1>
+        <p style={{ color: 'rgba(255, 255, 255, 0.9)' }}>Platform support and monitoring</p>
       </div>
     </div>
 
