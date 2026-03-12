@@ -74,7 +74,7 @@ const Home = () => {
             </div>
           </div>
           <div className="hero-visual">
-            <img src="/l1.jpeg" alt="Laundry business management" className="hero-image" />
+            <img src="/h2image.jpeg" alt="Laundry business management" className="hero-image" />
           </div>
         </div>
       </section>
