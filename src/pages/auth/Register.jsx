@@ -7,6 +7,11 @@ import { ROLES } from '../../utils/constants';
 import './Auth.css';
 
 const Register = () => {
+  const roleToBackend = {
+    [ROLES.CUSTOMER]: 'CUSTOMER',
+    [ROLES.OWNER]: 'OWNER',
+  };
+
   const [form, setForm] = useState({
     fullname: '',
     email: '',
@@ -20,41 +25,55 @@ const Register = () => {
   const { register } = useAuth();
   const navigate = useNavigate();
 
-  const validate = () => {
-    const errs = {};
-    if (!form.fullname.trim()) errs.fullname = 'Full name is required';
-    if (!form.email) errs.email = 'Email is required';
-    else if (!isValidEmail(form.email)) errs.email = 'Invalid email format';
-    if (!form.phone_number) errs.phone_number = 'Phone number is required';
-    else if (!isValidPhone(form.phone_number)) errs.phone_number = 'Enter a valid Kenyan number (e.g., 0712345678)';
-    if (!form.password) errs.password = 'Password is required';
-    else if (form.password.length < 6) errs.password = 'Password must be at least 6 characters';
-    if (form.password !== form.confirm_password) errs.confirm_password = 'Passwords do not match';
-    setErrors(errs);
-    return Object.keys(errs).length === 0;
+const validate = () => {
+  const errs = {};
+  if (!form.fullname.trim()) errs.fullname = 'Full name is required';
+  if (!form.email) errs.email = 'Email is required';
+  else if (!isValidEmail(form.email)) errs.email = 'Invalid email format';
+  if (!form.phone_number) errs.phone_number = 'Phone number is required';
+  else if (!isValidPhone(form.phone_number)) errs.phone_number = 'Enter a valid Kenyan number (e.g., 0712345678)';
+  if (!form.password) errs.password = 'Password is required';
+  else if (form.password.length < 8) errs.password = 'Password must be at least 8 characters';
+  if (form.password !== form.confirm_password) errs.confirm_password = 'Passwords do not match';
+  setErrors(errs);
+  return Object.keys(errs).length === 0;
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!validate()) return;
+
+  const normalizedEmail = form.email.trim().toLowerCase();
+  const baseUsername = normalizedEmail.split('@')[0].replace(/[^a-z0-9._-]/g, '').trim();
+  const randomSuffix = Math.floor(1000 + Math.random() * 9000); // Add a 4-digit random number
+  const uniqueUsername = `${baseUsername}${randomSuffix}`;
+
+  const payload = {
+    username: uniqueUsername, // required by backend and made unique
+    fullname: form.fullname.trim(),
+    email: normalizedEmail,
+    phone_number: form.phone_number.trim(),
+    role: roleToBackend[form.role] || 'CUSTOMER',
+    password: form.password,
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validate()) return;
-
-    setLoading(true);
-    try {
-      await register(form);
-      toast.success('Account created successfully! Please sign in.');
-      navigate('/login');
-    } catch (err) {
-      const data = err.response?.data;
-      if (data && typeof data === 'object') {
-        const firstKey = Object.keys(data)[0];
-        toast.error(Array.isArray(data[firstKey]) ? data[firstKey][0] : data[firstKey]);
-      } else {
-        toast.error('Registration failed. Please try again.');
-      }
-    } finally {
-      setLoading(false);
+  setLoading(true);
+  try {
+    await register(payload); // send payload, not full form
+    toast.success('Account created successfully! Please sign in.');
+    navigate('/login');
+  } catch (err) {
+    const data = err.response?.data;
+    if (data && typeof data === 'object') {
+      const firstKey = Object.keys(data)[0];
+      toast.error(Array.isArray(data[firstKey]) ? data[firstKey][0] : data[firstKey]);
+    } else {
+      toast.error('Registration failed. Please try again.');
     }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -128,7 +147,7 @@ const Register = () => {
                 type="password"
                 name="password"
                 className="form-input"
-                placeholder="Min 6 characters"
+                placeholder="Min 8 characters"
                 value={form.password}
                 onChange={handleChange}
               />

@@ -25,12 +25,19 @@ const Login = () => {
     e.preventDefault();
     if (!validate()) return;
 
+    // Standardize email before sending to backend
+    const payload = {
+      ...form,
+      email: form.email.trim().toLowerCase()
+    };
+
     setLoading(true);
     try {
-      const dashPath = await login(form);
+      const dashPath = await login(payload);
       toast.success('Welcome back!');
       navigate(dashPath);
     } catch (err) {
+      console.error("Login error:", err);
       const msg = err.response?.data?.detail || 'Invalid credentials. Please try again.';
       toast.error(msg);
     } finally {

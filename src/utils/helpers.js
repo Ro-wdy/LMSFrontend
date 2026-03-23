@@ -85,10 +85,13 @@ export const hasRole = (user, role) => {
  */
 export const getDashboardPath = (user) => {
   if (!user) return '/login';
-  if (user.is_superadmin) return '/dashboard/superadmin';
-  if (user.is_admin) return '/dashboard/admin';
-  if (user.roles?.includes(ROLES.OWNER)) return '/dashboard/owner';
-  if (user.roles?.includes(ROLES.STAFF)) return '/dashboard/staff';
+  // Check the single `role` field from the Django backend
+  const role = user.role;
+  
+  if (role === 'SUPERADMIN') return '/dashboard/superadmin';
+  if (role === 'ADMIN') return '/dashboard/admin';
+  if (role === 'OWNER') return '/dashboard/owner';
+  if (role === 'STAFF') return '/dashboard/staff';
   return '/dashboard/customer';
 };
 
