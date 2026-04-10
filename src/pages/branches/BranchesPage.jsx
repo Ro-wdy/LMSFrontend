@@ -5,14 +5,8 @@ import EmptyState from '../../components/common/EmptyState';
 import { toast } from 'react-toastify';
 import './Branches.css';
 
-const demoBranches = [
-  { id: 1, name: 'Westlands Branch', location: 'Westlands, Nairobi', phone_number: '0712345678', email: 'westlands@cleanexpress.co.ke', operations: true },
-  { id: 2, name: 'Kilimani Branch', location: 'Kilimani, Nairobi', phone_number: '0723456789', email: 'kilimani@cleanexpress.co.ke', operations: true },
-  { id: 3, name: 'CBD Branch', location: 'Kimathi Street, Nairobi', phone_number: '0734567890', email: '', operations: false },
-];
-
 const BranchesPage = () => {
-  const [branches, setBranches] = useState(demoBranches);
+  const [branches, setBranches] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [editBranch, setEditBranch] = useState(null);
   const [form, setForm] = useState({ name: '', location: '', phone_number: '', email: '', operations: true });

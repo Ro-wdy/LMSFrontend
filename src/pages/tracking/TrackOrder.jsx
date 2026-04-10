@@ -10,42 +10,6 @@ const TrackOrder = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Demo data — in real app, this calls orderService.trackOrder(orderNumber)
-  const demoOrderData = {
-    'ORD-A3F8K2P1': {
-      order_number: 'ORD-A3F8K2P1',
-      customer_name: 'John Kamau',
-      service: 'Wash & Iron',
-      quantity: 5,
-      status: 'ongoing',
-      branch: 'Westlands Branch',
-      created_at: '2026-02-25T10:30:00',
-      updates: [
-        { status: 'pending', timestamp: '2026-02-25T10:30:00', note: 'Order placed successfully' },
-        { status: 'accepted', timestamp: '2026-02-25T10:45:00', note: 'Order accepted by operator' },
-        { status: 'received', timestamp: '2026-02-25T14:00:00', note: 'Items received at branch' },
-        { status: 'ongoing', timestamp: '2026-02-25T15:00:00', note: 'Cleaning in progress' },
-      ],
-    },
-    'ORD-B7G2M9R4': {
-      order_number: 'ORD-B7G2M9R4',
-      customer_name: 'Mary Wanjiku',
-      service: 'Dry Cleaning',
-      quantity: 3,
-      status: 'delivered',
-      branch: 'Kilimani Branch',
-      created_at: '2026-02-24T14:15:00',
-      updates: [
-        { status: 'pending', timestamp: '2026-02-24T14:15:00', note: 'Order placed' },
-        { status: 'accepted', timestamp: '2026-02-24T14:30:00', note: 'Order accepted' },
-        { status: 'received', timestamp: '2026-02-24T16:00:00', note: 'Items received' },
-        { status: 'ongoing', timestamp: '2026-02-24T17:00:00', note: 'Processing' },
-        { status: 'done', timestamp: '2026-02-25T10:00:00', note: 'Items ready for pickup' },
-        { status: 'delivered', timestamp: '2026-02-25T14:00:00', note: 'Items delivered. Thank you!' },
-      ],
-    },
-  };
-
   const handleTrack = (e) => {
     e.preventDefault();
     if (!orderNumber.trim()) return;
@@ -54,16 +18,9 @@ const TrackOrder = () => {
     setError('');
     setOrder(null);
 
-    // Simulate API call
-    setTimeout(() => {
-      const found = demoOrderData[orderNumber.toUpperCase()];
-      if (found) {
-        setOrder(found);
-      } else {
-        setError('Order not found. Please check your order number and try again.');
-      }
-      setLoading(false);
-    }, 800);
+    // TODO: Replace with real API call to track order once backend endpoint is ready
+    setLoading(false);
+    setError('Order tracking is not yet connected to live data.');
   };
 
   return (
@@ -160,7 +117,7 @@ const TrackOrder = () => {
       {!order && !error && (
         <div className="container text-center mt-xl">
           <p className="text-muted">
-            Try tracking: <strong>ORD-A3F8K2P1</strong> or <strong>ORD-B7G2M9R4</strong>
+            Enter your order number above to track its status once live data is connected.
           </p>
         </div>
       )}

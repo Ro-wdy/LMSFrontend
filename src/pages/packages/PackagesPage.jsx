@@ -4,14 +4,8 @@ import Modal from '../../components/common/Modal';
 import { formatCurrency } from '../../utils/helpers';
 import { toast } from 'react-toastify';
 
-const demoPackages = [
-  { id: 1, package_name: 'Starter', amount: 0, discount: 0, features: ['1 Branch', 'Up to 50 orders/month', 'Basic dashboard', 'Email support'] },
-  { id: 2, package_name: 'Professional', amount: 2500, discount: 10, features: ['Up to 5 Branches', 'Unlimited orders', 'Advanced analytics', 'Payment integration', 'SMS notifications', 'Priority support'] },
-  { id: 3, package_name: 'Enterprise', amount: 7500, discount: 15, features: ['Unlimited Branches', 'Unlimited orders', 'Full analytics', 'All integrations', 'Unlimited SMS', 'Dedicated manager', 'Custom branding'] },
-];
-
 const PackagesPage = () => {
-  const [packages, setPackages] = useState(demoPackages);
+  const [packages, setPackages] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ package_name: '', amount: '', discount: '', features: '' });
 

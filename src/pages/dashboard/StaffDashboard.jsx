@@ -5,14 +5,6 @@ import StatusBadge from '../../components/common/StatusBadge';
 import { ORDER_STATUS } from '../../utils/constants';
 import './Dashboard.css';
 
-const pendingOrders = [
-  { id: 1, orderNumber: 'ORD-X1Y2Z3A4', customer: 'Alice Njeri', service: 'Wash & Iron', qty: 5, status: ORDER_STATUS.PENDING },
-  { id: 2, orderNumber: 'ORD-B5C6D7E8', customer: 'Tom Muturi', service: 'Dry Cleaning', qty: 3, status: ORDER_STATUS.PENDING },
-  { id: 3, orderNumber: 'ORD-F9G0H1I2', customer: 'Grace Akinyi', service: 'Wash & Fold', qty: 8, status: ORDER_STATUS.ACCEPTED },
-  { id: 4, orderNumber: 'ORD-J3K4L5M6', customer: 'David Kipchoge', service: 'Ironing Only', qty: 12, status: ORDER_STATUS.RECEIVED },
-  { id: 5, orderNumber: 'ORD-N7O8P9Q0', customer: 'Lucy Wambui', service: 'Bedding & Linen', qty: 2, status: ORDER_STATUS.ONGOING },
-];
-
 const StaffDashboard = () => {
   const navigate = useNavigate();
 
@@ -29,10 +21,10 @@ const StaffDashboard = () => {
       </div>
 
       <div className="stats-grid">
-        <StatCard icon={<IoAlertCircleOutline />} iconBg="var(--color-warning)" value="8" label="Pending Orders" />
-        <StatCard icon={<IoTimeOutline />} iconBg="var(--color-primary)" value="12" label="In Progress" />
-        <StatCard icon={<IoCheckmarkDoneOutline />} iconBg="var(--color-secondary)" value="45" label="Completed Today" />
-        <StatCard icon={<IoReceiptOutline />} iconBg="var(--color-teal)" value="65" label="Total Today" />
+        <StatCard icon={<IoAlertCircleOutline />} iconBg="var(--color-warning)" value="0" label="Pending Orders" />
+        <StatCard icon={<IoTimeOutline />} iconBg="var(--color-primary)" value="0" label="In Progress" />
+        <StatCard icon={<IoCheckmarkDoneOutline />} iconBg="var(--color-secondary)" value="0" label="Completed Today" />
+        <StatCard icon={<IoReceiptOutline />} iconBg="var(--color-teal)" value="0" label="Total Today" />
       </div>
 
       <div className="card mb-lg" style={{ borderTop: '4px solid var(--color-primary)' }}>
@@ -72,23 +64,11 @@ const StaffDashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {pendingOrders.map((order) => (
-                <tr key={order.id}>
-                  <td><strong>{order.orderNumber}</strong></td>
-                  <td>{order.customer}</td>
-                  <td>{order.service}</td>
-                  <td>{order.qty}</td>
-                  <td><StatusBadge status={order.status} /></td>
-                  <td>
-                    <button
-                      className="btn btn-primary btn-sm"
-                      onClick={() => navigate('/dashboard/orders')}
-                    >
-                      Update
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              <tr>
+                <td colSpan={6}>
+                  <span className="text-muted">No active orders to display.</span>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

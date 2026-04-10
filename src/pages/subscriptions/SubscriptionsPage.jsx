@@ -1,14 +1,8 @@
 import { useState } from 'react';
 import { formatCurrency, formatDate } from '../../utils/helpers';
 
-const demoSubscriptions = [
-  { id: 1, user: 'Clean Express Laundry', package: 'Professional', amount: 2500, expiry_date: '2026-06-25', payment_method: 'mpesa', receipt_number: 'SUB-001', confirmation_code: 'MPESA123' },
-  { id: 2, user: 'Fresh & Clean Ltd', package: 'Starter', amount: 0, expiry_date: '2026-12-31', payment_method: '-', receipt_number: '-', confirmation_code: '-' },
-  { id: 3, user: 'Sparkle Wash Services', package: 'Enterprise', amount: 7500, expiry_date: '2026-08-15', payment_method: 'card', receipt_number: 'SUB-003', confirmation_code: 'PSP-99887' },
-];
-
 const SubscriptionsPage = () => {
-  const [subscriptions] = useState(demoSubscriptions);
+  const [subscriptions] = useState([]);
 
   return (
     <div className="dashboard-page">

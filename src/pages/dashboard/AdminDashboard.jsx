@@ -19,10 +19,10 @@ const AdminDashboard = () => (
     </div>
 
     <div className="stats-grid">
-      <StatCard icon={<IoStorefrontOutline />} iconBg="var(--color-primary)" value="156" label="Businesses" />
-      <StatCard icon={<IoPeopleOutline />} iconBg="var(--color-secondary)" value="1,240" label="Users" />
-      <StatCard icon={<IoReceiptOutline />} iconBg="var(--color-warning)" value="87" label="Pending Orders" />
-      <StatCard icon={<IoAlertCircleOutline />} iconBg="var(--color-danger)" value="5" label="Support Tickets" />
+      <StatCard icon={<IoStorefrontOutline />} iconBg="var(--color-primary)" value="0" label="Businesses" />
+      <StatCard icon={<IoPeopleOutline />} iconBg="var(--color-secondary)" value="0" label="Users" />
+      <StatCard icon={<IoReceiptOutline />} iconBg="var(--color-warning)" value="0" label="Pending Orders" />
+      <StatCard icon={<IoAlertCircleOutline />} iconBg="var(--color-danger)" value="0" label="Support Tickets" />
     </div>
 
     <div className="dashboard-grid">
@@ -31,20 +31,9 @@ const AdminDashboard = () => (
           <h3 className="card-title">Recent Activity</h3>
         </div>
         <div className="activity-list">
-          {[
-            { text: 'New business registered: Clean Express', time: '5 min ago', color: 'var(--color-primary-bg)' },
-            { text: 'Payment confirmed for order #ORD-A3F8K2P1', time: '12 min ago', color: '#E8F5E9' },
-            { text: 'Support ticket #142 resolved', time: '1 hour ago', color: '#FFF3E0' },
-            { text: 'User Jane Doe updated profile', time: '2 hours ago', color: '#F3E5F5' },
-          ].map((a, i) => (
-            <div className="activity-item" key={i}>
-              <div className="activity-icon" style={{ background: a.color }}>📋</div>
-              <div className="activity-info">
-                <p>{a.text}</p>
-                <small>{a.time}</small>
-              </div>
-            </div>
-          ))}
+          <p className="text-muted" style={{ padding: 'var(--space-md)' }}>
+            No recent activity yet. Platform events will appear here.
+          </p>
         </div>
       </div>
 

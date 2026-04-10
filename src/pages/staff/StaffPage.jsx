@@ -4,15 +4,8 @@ import Modal from '../../components/common/Modal';
 import { ROLES, STAFF_STATUS } from '../../utils/constants';
 import { toast } from 'react-toastify';
 
-const demoStaff = [
-  { id: 1, name: 'Alice Njeri', email: 'alice@cleanexpress.co.ke', phone: '0712345678', branch: 'Westlands Branch', role: 'operator', status: 'active' },
-  { id: 2, name: 'Tom Muturi', email: 'tom@cleanexpress.co.ke', phone: '0723456789', branch: 'Kilimani Branch', role: 'operator', status: 'active' },
-  { id: 3, name: 'Grace Akinyi', email: 'grace@cleanexpress.co.ke', phone: '0734567890', branch: 'Westlands Branch', role: 'manager', status: 'active' },
-  { id: 4, name: 'James Ochieng', email: 'james@cleanexpress.co.ke', phone: '0745678901', branch: 'CBD Branch', role: 'operator', status: 'inactive' },
-];
-
 const StaffPage = () => {
-  const [staff, setStaff] = useState(demoStaff);
+  const [staff, setStaff] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', phone: '', branch: '', role: 'operator' });
 

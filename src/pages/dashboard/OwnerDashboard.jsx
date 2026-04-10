@@ -13,26 +13,6 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { formatCurrency } from '../../utils/helpers';
 import './Dashboard.css';
 
-const revenueData = [
-  { name: 'Mon', revenue: 12400 },
-  { name: 'Tue', revenue: 15800 },
-  { name: 'Wed', revenue: 11200 },
-  { name: 'Thu', revenue: 18600 },
-  { name: 'Fri', revenue: 22100 },
-  { name: 'Sat', revenue: 28400 },
-  { name: 'Sun', revenue: 16300 },
-];
-
-const ordersData = [
-  { name: 'Mon', orders: 24 },
-  { name: 'Tue', orders: 32 },
-  { name: 'Wed', orders: 18 },
-  { name: 'Thu', orders: 38 },
-  { name: 'Fri', orders: 42 },
-  { name: 'Sat', orders: 56 },
-  { name: 'Sun', orders: 30 },
-];
-
 const OwnerDashboard = () => {
   const navigate = useNavigate();
 
@@ -49,10 +29,10 @@ const OwnerDashboard = () => {
       </div>
 
       <div className="stats-grid">
-        <StatCard icon={<IoReceiptOutline />} iconBg="var(--color-primary)" value="240" label="Total Orders" />
-        <StatCard icon={<IoCardOutline />} iconBg="var(--color-secondary)" value="KES 125,400" label="This Month Revenue" />
-        <StatCard icon={<IoStarOutline />} iconBg="var(--color-warning)" value="4.7" label="Avg Rating" />
-        <StatCard icon={<IoStorefrontOutline />} iconBg="var(--color-teal)" value="3" label="Active Subscriptions" />
+        <StatCard icon={<IoReceiptOutline />} iconBg="var(--color-primary)" value="0" label="Total Orders" />
+        <StatCard icon={<IoCardOutline />} iconBg="var(--color-secondary)" value={formatCurrency(0)} label="This Month Revenue" />
+        <StatCard icon={<IoStarOutline />} iconBg="var(--color-warning)" value="0" label="Avg Rating" />
+        <StatCard icon={<IoStorefrontOutline />} iconBg="var(--color-teal)" value="0" label="Active Subscriptions" />
       </div>
 
       <div className="card mb-lg" style={{ borderTop: '4px solid var(--color-primary)' }}>
@@ -79,7 +59,7 @@ const OwnerDashboard = () => {
             <span className="badge badge-success"><IoTrendingUpOutline /> +18%</span>
           </div>
           <ResponsiveContainer width="100%" height={280}>
-            <LineChart data={revenueData}>
+            <LineChart data={[]}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
               <XAxis dataKey="name" tick={{ fontSize: 12 }} />
               <YAxis tick={{ fontSize: 12 }} tickFormatter={(v) => `${(v / 1000).toFixed(0)}K`} />
@@ -94,7 +74,7 @@ const OwnerDashboard = () => {
             <h3 className="card-title">Orders This Week</h3>
           </div>
           <ResponsiveContainer width="100%" height={280}>
-            <BarChart data={ordersData}>
+            <BarChart data={[]}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
               <XAxis dataKey="name" tick={{ fontSize: 12 }} />
               <YAxis tick={{ fontSize: 12 }} />
@@ -113,40 +93,9 @@ const OwnerDashboard = () => {
           </button>
         </div>
         <div className="table-wrapper">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Order #</th>
-                <th>Customer</th>
-                <th>Service</th>
-                <th>Amount</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>ORD-A3F8K2P1</strong></td>
-                <td>John Kamau</td>
-                <td>Wash & Iron</td>
-                <td>{formatCurrency(1200)}</td>
-                <td><span className="badge badge-warning">Pending</span></td>
-              </tr>
-              <tr>
-                <td><strong>ORD-B7G2M9R4</strong></td>
-                <td>Mary Wanjiku</td>
-                <td>Dry Cleaning</td>
-                <td>{formatCurrency(2500)}</td>
-                <td><span className="badge badge-info">Accepted</span></td>
-              </tr>
-              <tr>
-                <td><strong>ORD-C1H5N3T8</strong></td>
-                <td>Peter Omondi</td>
-                <td>Wash & Fold</td>
-                <td>{formatCurrency(800)}</td>
-                <td><span className="badge badge-success">Delivered</span></td>
-              </tr>
-            </tbody>
-          </table>
+          <p className="text-muted" style={{ padding: 'var(--space-md)' }}>
+            No recent orders yet. New orders will appear here.
+          </p>
         </div>
       </div>
     </div>

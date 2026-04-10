@@ -1,15 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IoStarOutline, IoStar } from 'react-icons/io5';
 import { toast } from 'react-toastify';
 import { formatDate } from '../../utils/helpers';
 import './Feedback.css';
-
-const demoFeedbacks = [
-  { id: 1, name: 'John Kamau', service: 'Wash & Iron', rating: 5, comment: 'Excellent service! Clothes came back perfectly pressed.', date: '2026-02-25' },
-  { id: 2, name: 'Mary Wanjiku', service: 'Dry Cleaning', rating: 4, comment: 'Good quality, but delivery was a bit late.', date: '2026-02-24' },
-  { id: 3, name: 'Peter Omondi', service: 'Wash & Fold', rating: 5, comment: '', date: '2026-02-23' },
-  { id: 4, name: 'Grace Akinyi', service: 'Ironing Only', rating: 3, comment: 'Average service. Could improve turnaround time.', date: '2026-02-22' },
-];
 
 const StarRating = ({ rating, onRate, interactive = false }) => (
   <div className="star-rating">
@@ -26,23 +19,46 @@ const StarRating = ({ rating, onRate, interactive = false }) => (
 );
 
 const FeedbackPage = () => {
-  const [feedbacks, setFeedbacks] = useState(demoFeedbacks);
+  const [feedbacks, setFeedbacks] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ name: '', service: '', rating: 0, comment: '' });
+  const [form, setForm] = useState({ orderNumber: '', name: '', service: '', rating: 0, comment: '' });
+
+  // Load saved feedbacks from localStorage so they survive reloads
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('feedbacks');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          setFeedbacks(parsed);
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load saved feedbacks', err);
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.name || !form.rating) {
-      toast.error('Please provide your name and rating');
+    if (!form.orderNumber || !form.rating) {
+      toast.error('Please provide the order number and rating');
       return;
     }
-    setFeedbacks((prev) => [
-      { id: prev.length + 1, ...form, date: new Date().toISOString().split('T')[0] },
-      ...prev,
-    ]);
+    setFeedbacks((prev) => {
+      const next = [
+        { id: prev.length + 1, ...form, date: new Date().toISOString().split('T')[0] },
+        ...prev,
+      ];
+      try {
+        localStorage.setItem('feedbacks', JSON.stringify(next));
+      } catch (err) {
+        console.error('Failed to save feedbacks', err);
+      }
+      return next;
+    });
     toast.success('Thank you for your feedback!');
     setShowForm(false);
-    setForm({ name: '', service: '', rating: 0, comment: '' });
+    setForm({ orderNumber: '', name: '', service: '', rating: 0, comment: '' });
   };
 
   const avgRating = feedbacks.length > 0
@@ -77,12 +93,31 @@ const FeedbackPage = () => {
           <form onSubmit={handleSubmit}>
             <div className="form-row">
               <div className="form-group">
-                <label className="form-label">Your Name</label>
-                <input className="form-input" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
+                <label className="form-label">Order Number</label>
+                <input
+                  className="form-input"
+                  placeholder="e.g. ORD-A3F8K2P1"
+                  value={form.orderNumber}
+                  onChange={(e) => setForm({ ...form, orderNumber: e.target.value })}
+                  required
+                />
               </div>
               <div className="form-group">
-                <label className="form-label">Service</label>
-                <input className="form-input" placeholder="e.g. Wash & Iron" value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })} />
+                <label className="form-label">Your Name (optional)</label>
+                <input
+                  className="form-input"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Service (optional)</label>
+                <input
+                  className="form-input"
+                  placeholder="e.g. Wash & Iron"
+                  value={form.service}
+                  onChange={(e) => setForm({ ...form, service: e.target.value })}
+                />
               </div>
             </div>
             <div className="form-group">
@@ -104,8 +139,9 @@ const FeedbackPage = () => {
           <div className="card feedback-card" key={fb.id}>
             <div className="feedback-header">
               <div>
-                <strong>{fb.name}</strong>
-                <span className="text-muted"> • {fb.service}</span>
+                <strong>Order {fb.orderNumber}</strong>
+                {fb.name && <span className="text-muted"> • {fb.name}</span>}
+                {fb.service && <span className="text-muted"> • {fb.service}</span>}
               </div>
               <small className="text-muted">{formatDate(fb.date)}</small>
             </div>

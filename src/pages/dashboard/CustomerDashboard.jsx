@@ -6,12 +6,6 @@ import { ORDER_STATUS } from '../../utils/constants';
 import { formatCurrency, formatDate } from '../../utils/helpers';
 import './Dashboard.css';
 
-const myOrders = [
-  { id: 1, orderNumber: 'ORD-MY001', service: 'Wash & Iron', qty: 5, amount: 1200, status: ORDER_STATUS.ONGOING, date: '2026-02-24' },
-  { id: 2, orderNumber: 'ORD-MY002', service: 'Dry Cleaning', qty: 2, amount: 2500, status: ORDER_STATUS.DONE, date: '2026-02-22' },
-  { id: 3, orderNumber: 'ORD-MY003', service: 'Wash & Fold', qty: 8, amount: 800, status: ORDER_STATUS.DELIVERED, date: '2026-02-20' },
-];
-
 const CustomerDashboard = () => {
   const navigate = useNavigate();
 
@@ -35,10 +29,10 @@ const CustomerDashboard = () => {
       </div>
 
       <div className="stats-grid">
-        <StatCard icon={<IoReceiptOutline />} iconBg="var(--color-primary)" value="12" label="Total Orders" />
-        <StatCard icon={<IoTimeOutline />} iconBg="var(--color-warning)" value="2" label="In Progress" />
-        <StatCard icon={<IoCheckmarkDoneOutline />} iconBg="var(--color-secondary)" value="10" label="Completed" />
-        <StatCard icon={<IoStarOutline />} iconBg="var(--color-teal)" value="3" label="Feedbacks Given" />
+        <StatCard icon={<IoReceiptOutline />} iconBg="var(--color-primary)" value="0" label="Total Orders" />
+        <StatCard icon={<IoTimeOutline />} iconBg="var(--color-warning)" value="0" label="In Progress" />
+        <StatCard icon={<IoCheckmarkDoneOutline />} iconBg="var(--color-secondary)" value="0" label="Completed" />
+        <StatCard icon={<IoStarOutline />} iconBg="var(--color-teal)" value="0" label="Feedbacks Given" />
       </div>
 
       <div className="dashboard-grid">
@@ -63,21 +57,11 @@ const CustomerDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {myOrders.map((order) => (
-                  <tr key={order.id}>
-                    <td><strong>{order.orderNumber}</strong></td>
-                    <td>{order.service}</td>
-                    <td>{order.qty}</td>
-                    <td>{formatCurrency(order.amount)}</td>
-                    <td>{formatDate(order.date)}</td>
-                    <td><StatusBadge status={order.status} /></td>
-                    <td>
-                      <button className="btn btn-primary btn-sm" style={{ padding: '0.4rem 1rem', background: 'var(--color-primary)' }} onClick={() => navigate('/track-order')}>
-                        Track Order
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                <tr>
+                  <td colSpan={7}>
+                    <span className="text-muted">You have no orders yet.</span>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>

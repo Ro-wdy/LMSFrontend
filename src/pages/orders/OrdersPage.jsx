@@ -8,17 +8,8 @@ import { formatCurrency, formatDateTime } from '../../utils/helpers';
 import { toast } from 'react-toastify';
 import './Orders.css';
 
-const demoOrders = [
-  { id: 1, order_number: 'ORD-A3F8K2P1', customer_name: 'John Kamau', email: 'john@mail.com', phone_number: '0712345678', location: 'Westlands, Nairobi', service: 'Wash & Iron', quantity: 5, amount: 1200, status: 'pending', is_delivery: true, is_pickup: true, created_at: '2026-02-25T10:30:00' },
-  { id: 2, order_number: 'ORD-B7G2M9R4', customer_name: 'Mary Wanjiku', email: 'mary@mail.com', phone_number: '0723456789', location: 'Kilimani, Nairobi', service: 'Dry Cleaning', quantity: 3, amount: 2500, status: 'accepted', is_delivery: false, is_pickup: true, created_at: '2026-02-24T14:15:00' },
-  { id: 3, order_number: 'ORD-C1H5N3T8', customer_name: 'Peter Omondi', email: 'peter@mail.com', phone_number: '0734567890', location: 'Langata, Nairobi', service: 'Wash & Fold', quantity: 8, amount: 800, status: 'received', is_delivery: true, is_pickup: false, created_at: '2026-02-23T09:00:00' },
-  { id: 4, order_number: 'ORD-D4E6F7G8', customer_name: 'Grace Akinyi', email: 'grace@mail.com', phone_number: '0745678901', location: 'Karen, Nairobi', service: 'Ironing Only', quantity: 12, amount: 600, status: 'ongoing', is_delivery: false, is_pickup: true, created_at: '2026-02-22T16:45:00' },
-  { id: 5, order_number: 'ORD-H9I0J1K2', customer_name: 'David Kipchoge', email: 'david@mail.com', phone_number: '0756789012', location: 'CBD, Nairobi', service: 'Wash & Iron', quantity: 4, amount: 960, status: 'done', is_delivery: true, is_pickup: true, created_at: '2026-02-21T11:30:00' },
-  { id: 6, order_number: 'ORD-L3M4N5O6', customer_name: 'Lucy Wambui', email: 'lucy@mail.com', phone_number: '0767890123', location: 'Lavington, Nairobi', service: 'Bedding & Linen', quantity: 2, amount: 3000, status: 'delivered', is_delivery: true, is_pickup: false, created_at: '2026-02-20T08:00:00' },
-];
-
 const OrdersPage = () => {
-  const [orders, setOrders] = useState(demoOrders);
+  const [orders, setOrders] = useState([]);
   const [search, setSearch] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
   const [selectedOrder, setSelectedOrder] = useState(null);

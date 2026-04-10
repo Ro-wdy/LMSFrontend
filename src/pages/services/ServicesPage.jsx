@@ -6,16 +6,8 @@ import { formatCurrency } from '../../utils/helpers';
 import { toast } from 'react-toastify';
 import './Services.css';
 
-const demoServices = [
-  { id: 1, name: 'wash_and_fold', branch: 'Westlands Branch', amount: 200, units: 'per kg', timeline: '24 hours', extras: 'Folding included' },
-  { id: 2, name: 'wash_and_iron', branch: 'Westlands Branch', amount: 300, units: 'per kg', timeline: '24 hours', extras: 'Ironing, Folding' },
-  { id: 3, name: 'dry_cleaning', branch: 'Kilimani Branch', amount: 500, units: 'per piece', timeline: '48 hours', extras: 'Stain treatment' },
-  { id: 4, name: 'ironing_only', branch: 'Kilimani Branch', amount: 100, units: 'per piece', timeline: '12 hours', extras: '' },
-  { id: 5, name: 'bedding_and_linen', branch: 'Westlands Branch', amount: 800, units: 'per piece', timeline: '48 hours', extras: 'Deep clean, Sanitize' },
-];
-
 const ServicesPage = () => {
-  const [services, setServices] = useState(demoServices);
+  const [services, setServices] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [editService, setEditService] = useState(null);
   const [form, setForm] = useState({ name: 'wash_and_fold', branch: '', amount: '', units: 'per kg', timeline: '', extras: '' });
